@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script>
+
+        function calc() {
+            const L2G = 4.54609;   // litres to gallons
+
+            var priceperltr = document.getElementById('costperlitre').value;
+            var mpg = document.getElementById('mpg').value;
+            var distance = document.getElementById('distance').value;
+
+            var pricepergallon = priceperltr * L2G;
+            var pricepermile = pricepergallon / mpg;
+
+            var totalcost = (pricepermile * distance / 100).toFixed(2);   // divide by 100 to put back into pounds
+
+            document.getElementById('total').innerText = totalcost;
+
+
+            console.log("price = " + priceperltr);
+            console.log("mpg = " + mpg);
+            console.log("distance = " + distance);
+            console.log("pricepergallon = " + pricepergallon);
+            console.log("totalcost = " + totalcost);
+
+        }
+
+
+        // event listener for increment buttons
+
+        document.addEventListener('click', ({ target }) => {
+
+            // todo - can this be made more specific? to only listen to certain buttons?
+            // console.log("Listener!");
+
+            var buttonValue = target.innerText;
+
+            console.log("clicked = " + buttonValue);
+
+            if (target.matches('button')) {
+
+
+                console.log("index of x is " + buttonValue.indexOf("*"));
+
+                if (buttonValue.indexOf("*") == 0) {
+
+                    console.log("multiply");
+
+                    buttonValue = parseInt(buttonValue.replace('*', ''));
+
+                    // console.log("value is now " +  (buttonValue));
+
+                    var distanceVal = parseInt(document.getElementById("distance").value);   // todo - move to top and remove duplicates
+                    document.getElementById("distance").value = distanceVal * buttonValue;
+
+
+
+
+                }
+
+     
+
+
+                
+                buttonValue = parseInt(buttonValue);
+                
+                
+                if (typeof buttonValue == 'string') {
+                    
+                  
+                    
+                }
+                
+                else {
+                  
+
+
+                    var distanceVal = parseInt(document.getElementById("distance").value);  
+
+                    // document.getElementById("distance").value = buttonValue + distanceVal;
+                    document.getElementById("distance").value = buttonValue;
+
+                }
+            }
+
+
+        });
+
+
+
+
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel cost calc</title>
+</head>
+
+<body>
+    <h1>Fuel cost calculator</h1>
+    <h2>Total cost of fuel for a particular journey</h2>
+
+    <table>
+        <tr>
+            <td>Fuel cost per litre (pence)</td>
+            <td><input type="number" name="costperlitre" id="costperlitre" placeholder="e.g. 185" value="185"></td>
+        </tr>
+        <tr>
+            <td>MPG</td>
+            <td><input type="number" name="mpg" id="mpg" placeholder="e.g. 50" value="50"></td>
+        </tr>
+        <tr>
+            <td>journey distance</td>
+            <td><input type="number" name="distance" id="distance" placeholder="e.g. 200" value="5.46">
+
+                <div id="presets">
+
+                    <div id="exact">
+                        <button class="btn">10</button>
+                        <button class="absolute">20</button>
+                        <button class="absolute">30</button>
+                        <button class="absolute">100</button>
+                    </div>
+
+                    <div id="relative">
+
+                        <button id="mulitply">*10</button>
+                        <button id="plus1">+1</button>
+                        <button id="plus10">+10</button>
+                        <button id="other">Other (test)</button>
+
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td><button id="showtotal" onclick="calc()"><span>See result!</span>Calc
+                    <!-- todo - change to listener -->
+                </button></td>
+            <td>
+                Total cost = £
+                <span id="total"></span>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
