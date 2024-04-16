@@ -47,8 +47,11 @@
 
         // echo date('d m y ', 192809396);
 
-     $d1 =   date_create("1969-07-03");
-     $d2 =   date_create("24-04-10");
+     $d1 =   date_create("1969-07-03");  
+    //  $d2 =   date_create("24-04-10");
+     $d2 =   date_create( date("Y-m-d")); // whatever today's date is.
+
+
 
      $diff = date_diff($d1, $d2 );
       echo '<pre>';
